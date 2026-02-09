@@ -1,2 +1,2 @@
 # gcp-mentoring-backend-1
-Simple Java repository to learn GCP
+Simple Python repository to learn GCP
