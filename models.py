@@ -8,3 +8,14 @@ class Anamnesis(BaseModel):
     experience_level: str
     email: str
     cellphone: str
+    
+class WorkoutReview(BaseModel):
+    score: float
+    adjustments: str
+    is_safe: bool
+
+class FinalWorkoutResponse(BaseModel):
+    anamnesis_summary: str
+    workout_plan: str
+    review: WorkoutReview
+    attempts: int
