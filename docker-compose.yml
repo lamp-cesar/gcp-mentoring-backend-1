@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  ai-personal-trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gcp-mentoring-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-your_api_key_here}
+      - LOG_LEVEL=INFO
+    volumes:
+      # Optional: Mount project directory for development
+      - .:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
