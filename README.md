@@ -1,54 +1,77 @@
-AI Personal Trainer: Multi-Agent Workout Generator
-Este projeto consiste em uma aplicação Python baseada em Arquitetura Multi-Agente para a criação de treinos de musculação hiper-personalizados. O diferencial da solução é o seu loop de refinamento autonômo, onde agentes especializados colaboram para garantir que a prescrição final atinja um padrão de qualidade superior a 8.5/10 antes de ser entregue ao usuário.
+# AI Personal Trainer: Multi-Agent Workout Generator
 
-🤖 A Arquitetura dos Agentes
-A aplicação opera através de três núcleos de inteligência:
+A Python-based multi-agent system that generates hyper-personalized workout plans using AI. The system uses an autonomous refinement loop to ensure workout quality scores exceed 8.5/10 before delivery.
 
-Agente de Anamnese: Processa os dados brutos do usuário (idade, peso, lesões, objetivos, disponibilidade) e extrai os requisitos técnicos.
+## Prerequisites
 
-Agente Treinador (Personal Trainer): Recebe os requisitos e monta a estrutura de treino (exercícios, séries, repetições e períodos de descanso).
+- Python 3.10 or later (3.12+ recommended)
+- Poetry (dependency manager)
+- Google API Key for Gemini access
 
-Agente Avaliador (QA/Validador): Atua como um auditor. Ele avalia o treino gerado comparando-o com as melhores práticas de fisiologia do exercício e atribui uma nota. Se a nota for inferior a 8.5, o treino retorna ao Treinador com o feedback detalhado para ajustes.
+## Quick Start
 
-🚀 Como Executar
-Atualmente, a aplicação está configurada para execução em ambiente local via terminal.
+### 1. Clone and Setup
+```bash
+git clone <repository-url>
+cd gcp-mentoring-backend
+```
 
-1. Pré-requisitos
-Python 3.10 ou superior.
+### 2. Install Dependencies
+```bash
+make install
+```
 
-Uma chave de API (OpenAI, Anthropic ou Google Gemini) configurada no .env.
+### 3. Configure Environment
+Create a `.env` file in the project root with your Google API key:
+```
+GOOGLE_API_KEY=your_api_key_here
+```
 
-2. Instalação
-Clone o repositório e instale as dependências:
+### 4. Run the Application
+```bash
+make run
+```
 
-Bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/ai-personal-trainer.git
-cd ai-personal-trainer
+The FastAPI server starts on `http://localhost:8080`
 
-# (Opcional) Crie um ambiente virtual
-python -m venv venv
-source venv/bin/activate  # No Windows: venv\Scripts\activate
+## API Endpoint
 
-# Instale as dependências
-pip install -r requirements.txt
-3. Configuração
-Crie um arquivo .env na raiz do projeto e adicione suas variáveis de ambiente:
+**POST** `/generate-workout`
 
-Snippet de código
-# Exemplo de configuração
-API_KEY=sua_chave_aqui
-LOG_LEVEL=INFO
-4. Execução
-Para iniciar o processo de geração do treino:
+Request body:
+```json
+{
+  "name": "John Doe",
+  "age": 30,
+  "weight": 75,
+  "goal": "muscle_gain",
+  "experience_level": "intermediate",
+  "email": "john@example.com",
+  "cellphone": "5511999999999"
+}
+```
 
-Bash
-python main.py
-☁️ Roadmap de Deploy
-[ ] Containerização via Docker.
+Response: Personalized workout plan with exercise details, sets, reps, and rest periods.
 
-[ ] Criação de CI/CD via GitHub Actions.
+## Available Commands
 
-[ ] Deploy em GCP Cloud Run.
+- `make install` — Install all dependencies using Poetry
+- `make run` — Start the development server
+- `make test` — Run tests with pytest
+- `make lint` — Check code quality with ruff
+- `make format` — Format code with black
+- `make clean` — Remove build artifacts and cache
 
-[ ] Exposição de endpoint via API Fast API.
+## Tech Stack
+
+- **Framework**: FastAPI + Uvicorn
+- **LLM**: Google Gemini 2.5 Flash
+- **Dependency Management**: Poetry
+- **Environment**: Python 3.10+
+
+## Roadmap
+
+- [ ] Docker containerization
+- [ ] CI/CD pipeline with GitHub Actions
+- [ ] GCP Cloud Run deployment
+- [ ] Advanced monitoring and logging
